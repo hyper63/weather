@@ -27,11 +27,16 @@ In order to follow along with this workshop you will need an api key from https:
 ## Setup
 
 Pull workshop template down from github
-and initialize it.
+and initialize it and provide link to clone.
 
 ```sh
 npx degit hyper63/svelte101-workshop weather-app
 cd $_
+git init
+git add .
+git commit -am "first commit"
+gh create s101-2020-9-25
+# add remote repo
 yarn
 ```
 
@@ -43,14 +48,26 @@ code .
 
 ## Tour Repository
 
+Check out quickstart guide:
+
+https://svelte.dev/blog/the-easiest-way-to-get-started
+
+Quick tour of a common svelte project
+
 - public - contains all public assets
 - src - contains your source code
 
+```sh
+git checkout -b 1-template-basics
+```
+
 ## Svelte Basics
 
-Open `src/views/Current.svelte` in editor
+https://svelte.dev/docs
 
 Lets turn this static html into a template:
+
+`src/views/Current.svelte`
 
 ```html
 <script>
@@ -106,6 +123,18 @@ You can also curly braces within properties, `src="/icons/{weather.icon}.png"`
 <article><aside>
 
 Use the `{@html ...}` to convert a variable to html. https://svelte.dev/docs#html
+
+</aside></article>
+
+<article><aside>
+
+Create checkpoint
+
+```sh
+git commit -am "1-template-basics"
+git push origin 1-template-basics
+git checkout -b 2-creating-component
+```
 
 </aside></article>
 
@@ -167,6 +196,18 @@ Now our `src/views/Current.svelte` component looks like this
 
 We can pass props by using `name={value}` or if the prop is the same name as the variable. `{value}` or we can use the spread operator: `{...value}` which will take an object and spread each key as a property.
 
+<article><aside>
+
+Create Checkpoint
+
+```sh
+git commit -am "2-creating-component"
+git push origin 2-creating-component
+git checkout -b 3-reactivity
+```
+
+</aside></article>
+
 ## Reactivity - Changing display of temp
 
 In the top left corner of our app, we have a couple of links, on `F` and one `C` we want to capture the `click` event of these links and then based on the current temperature unit, we want to convert to the other temperature unit. We can use a module called `temperature` to help with the conversion. But we need to know the current value of the temperature and the current unit it is in. For example, now we have it listed as Fahrenheit.
@@ -219,6 +260,18 @@ This is where reactivity comes into play. We can listen to the temp and unit var
 ```
 
 In this lesson, we learned about the `on` directive and how we can `|preventDefault` to directives. Also we learned about the `$:` reactivity command and how it can work like a formula in excel.
+
+<article><aside>
+
+Create checkpoint
+
+```sh
+git commit -am "3-reactivity"
+git push origin 3-reactivity
+git checkout -b 4-async
+```
+
+</aside></article>
 
 ## Async - Calling an API
 
@@ -347,6 +400,18 @@ Or we could create an async function and use the `{#await}` command.
 
 In this lesson, we learned about two ways to handle async requests from components at the point of loading.
 
+<article><aside>
+
+Create checkpoint
+
+```sh
+git commit -am "4-async"
+git push origin 4-async
+git checkout -b 5-events
+```
+
+</aside></article>
+
 ## {#each} and Dispatching Events
 
 Lets start working on the `src/views/Favorites.svelte` view. This view lists the users favorite cities that they would like to get the weather from. Eventually, we will pull this list from the database, but for now, we will create a local variable.
@@ -420,6 +485,22 @@ From the click event, we need to route to the current view with the correct city
 
 In this lesson, we created another component to handle each city card and used the `{#each}` template command to iterate over a list of cities and display the city card. Then we added a custom event to the city card which we handled in the Favorites component. Now we need to navigate from the favorites component to the Current component.
 
+<article><aside>
+
+Create checkpoint
+
+```sh
+git commit -am "5-events"
+git push origin 5-events
+git checkout -b 6-routing
+```
+
+</aside></article>
+
+### Take Break
+
+---
+
 ## Routing
 
 For routing, we are going to use pagejs a framework agnostic routing component modeled after express.
@@ -492,6 +573,20 @@ Use page to navigate to Current
   }
 </style>
 ```
+
+<article><aside>
+
+Create checkpoint
+
+```sh
+git commit -am "6-routing"
+git push origin 6-routing
+git checkout -b 7-stores
+```
+
+</aside></article>
+
+---
 
 ## Stores - Sharing data between components
 
@@ -620,6 +715,20 @@ export const dispatch = (action) =>
 </style>
 ```
 
+<article><aside>
+
+Create checkpoint
+
+```sh
+git commit -am "7-stores"
+git push origin 7-stores
+git checkout -b 8-transitions
+```
+
+</aside></article>
+
+---
+
 ## Transitions
 
 https://svelte.dev/docs#svelte_transition
@@ -732,7 +841,21 @@ https://svelte.dev/docs#svelte_transition
 </style>
 ```
 
-## Actions
+<article><aside>
+
+Create checkpoint
+
+```sh
+git commit -am "8-transitions"
+git push origin 8-transitions
+git checkout -b 9-modal-actions
+```
+
+</aside></article>
+
+---
+
+## Modal and Actions
 
 To handle adding a new city, lets use a modal component.
 
@@ -890,6 +1013,20 @@ https://svelte.dev/repl/e94473c00c5c422fa736ba60a2ca0e61?version=3.26.0
 </style>
 ```
 
+<article><aside>
+
+Create checkpoint
+
+```sh
+git commit -am "9-modal-actions"
+git push origin 9-modal-actions
+git checkout -b 10-testing
+```
+
+</aside></article>
+
+---
+
 ## Testing
 
 ## Install cypress
@@ -1030,5 +1167,9 @@ This command will run cypress in the console.
 If everything went as planned you should see a print out showing App.spec.js passed and all specs passed!
 
 https://docs.cypress.io/guides/overview/why-cypress.html#In-a-nutshell
+
+## Feedback Form
+
+https://forms.gle/5hV7or82nd8qGFAd8
 
 </main>
