@@ -57,9 +57,13 @@ Quick tour of a common svelte project
 - public - contains all public assets
 - src - contains your source code
 
+
 ```sh
 git checkout -b 1-template-basics
 ```
+
+---
+
 
 ## Svelte Basics
 
@@ -138,6 +142,14 @@ git checkout -b 2-creating-component
 
 </aside></article>
 
+### Summary
+
+Svelte is designed to be similar to an old school html page, markup, styles, and scripts in one file. Then `{}` for dynamic
+content. Being able to declare a local variable in a script tag
+and reference the value in the markdup is a clean design. It is very intuitive when you look at the component.
+
+---
+
 ## Components - Creating a component
 
 Lets convert the main section of the Current.svelte component into a reusable weather component:
@@ -208,6 +220,12 @@ git checkout -b 3-reactivity
 
 </aside></article>
 
+### Summary
+
+Svelte leverages the single file component design, this design keeps your files focused on one specfic unit of work. This allows the scope to be explicit, if I declare a variable in the script tag, it is available to all of the markup. While some may argue that it reduces flexibility, it does lean towards clarity.
+
+---
+
 ## Reactivity - Changing display of temp
 
 In the top left corner of our app, we have a couple of links, on `F` and one `C` we want to capture the `click` event of these links and then based on the current temperature unit, we want to convert to the other temperature unit. We can use a module called `temperature` to help with the conversion. But we need to know the current value of the temperature and the current unit it is in. For example, now we have it listed as Fahrenheit.
@@ -259,7 +277,6 @@ This is where reactivity comes into play. We can listen to the temp and unit var
 <main>{@html displayTemp} ...</main>
 ```
 
-In this lesson, we learned about the `on` directive and how we can `|preventDefault` to directives. Also we learned about the `$:` reactivity command and how it can work like a formula in excel.
 
 <article><aside>
 
@@ -272,6 +289,12 @@ git checkout -b 4-async
 ```
 
 </aside></article>
+
+## Summary
+
+In this lesson, we learned about the `on` directive and how we can `|preventDefault` to directives. Also we learned about the `$:` reactivity command and how it can work like a formula in excel. `$:` label is valid javascript and is rarely used, in svelte you can think of it as a way to mark a variable or block of code as reactive, which will create watches on every variable in the calculation logic of the expression or block. And when they change, Svelte will run the block or assign the variable.
+
+---
 
 ## Async - Calling an API
 
@@ -398,8 +421,6 @@ Or we could create an async function and use the `{#await}` command.
 </style>
 ```
 
-In this lesson, we learned about two ways to handle async requests from components at the point of loading.
-
 <article><aside>
 
 Create checkpoint
@@ -411,6 +432,12 @@ git checkout -b 5-events
 ```
 
 </aside></article>
+
+### Summary
+
+In this lesson, we learned about two ways to handle async requests from components at the point of loading. 
+
+---
 
 ## {#each} and Dispatching Events
 
@@ -483,8 +510,6 @@ From the click event, we need to route to the current view with the correct city
 </style>
 ```
 
-In this lesson, we created another component to handle each city card and used the `{#each}` template command to iterate over a list of cities and display the city card. Then we added a custom event to the city card which we handled in the Favorites component. Now we need to navigate from the favorites component to the Current component.
-
 <article><aside>
 
 Create checkpoint
@@ -496,6 +521,12 @@ git checkout -b 6-routing
 ```
 
 </aside></article>
+
+### Summary
+
+In this lesson, we created another component to handle each city card and used the `{#each}` template command to iterate over a list of cities and display the city card. Then we added a custom event to the city card which we handled in the Favorites component. Now we need to navigate from the favorites component to the Current component.
+
+---
 
 ### Take Break
 
@@ -585,6 +616,9 @@ git checkout -b 7-stores
 ```
 
 </aside></article>
+
+### Summary
+
 
 ---
 
@@ -727,6 +761,10 @@ git checkout -b 8-transitions
 
 </aside></article>
 
+### Summary
+
+
+
 ---
 
 ## Transitions
@@ -852,6 +890,9 @@ git checkout -b 9-modal-actions
 ```
 
 </aside></article>
+
+### Summary
+
 
 ---
 
@@ -1025,6 +1066,10 @@ git checkout -b 10-testing
 
 </aside></article>
 
+### Summary
+
+
+
 ---
 
 ## Testing
@@ -1167,6 +1212,23 @@ This command will run cypress in the console.
 If everything went as planned you should see a print out showing App.spec.js passed and all specs passed!
 
 https://docs.cypress.io/guides/overview/why-cypress.html#In-a-nutshell
+
+
+### Summary
+
+---
+
+## Fin
+
+This ends the workshop, but you do not have to end the journey here, you can take this application to greater lengths:
+
+* Add a dynamic background, based on the weather
+* Store your favorite cities on localStorage
+* Show wind and tidal information from weatherbit
+* Convert web app to mobile app using capacitorjs
+* What else?
+
+### Thank you!
 
 ## Feedback Form
 
