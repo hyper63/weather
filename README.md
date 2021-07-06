@@ -8,6 +8,17 @@ code: true
 
 # Svelte101 Workshop Notes
 
+> ### What will I learn?
+>
+> * Svelte Basics
+> * How to create a Svelte Component
+> * How reactivity works
+> * How to call async functions
+> * How to create lists in Svelte
+> * How to dispatch events from one component to another
+> * How to setup and use single page routing
+> * 
+
 ## About this workshop
 
 This workshop is an immersive dive into the Svelte Framework, as a group, we will build a front-end application in Svelte and through the course of building this application, we will learn many of the features and benefits that Svelte has to offer. The notes will reference links to the svelte documentation if you want to dig deeper into any one feature. The purpose of this workshop is to give you a hands on feel of what it is like to work with the framework day in and day out. If you are up to the challenge please code along with the instructor, if the pace is too fast for you, don't worry, after the event the recorded version will be available for your to go at your own pace.
@@ -35,7 +46,7 @@ cd $_
 git init
 git add .
 git commit -am "first commit"
-gh create s101-2020-9-25
+gh create s101-2021-7-7 # install gh: https://cli.github.com/manual/installation
 # add remote repo
 yarn
 ```
@@ -540,26 +551,18 @@ For routing, we are going to use pagejs a framework agnostic routing component m
 
 ```html
 <script>
-  import router from "page";
+  import {Route} from "tinro";
 
   import Current from "./views/Current.svelte";
   import Favorites from "./views/Favorites.svelte";
-  import Add from "./views/Add.svelte";
 
-  let page;
-
-  router("/", navTo(Current));
-  router("/favorites", navTo(Favorites));
-
-  router.start();
-
-  function navTo(Component) {
-    return (ctx) => {
-      page = Component;
-    };
-  }
 </script>
-<svelte:component this="{page}" />
+
+<Route path="/"><Current /></Route>
+<Route path="/favorites/*">
+  <Route path="/"><Favorites /></Route>
+</Route>
+
 ```
 
 `src/views/Current.svelte`
@@ -573,14 +576,14 @@ Use page to navigate to Current
 ```html
 <script>
   import CityCard from "../components/CityCard.svelte";
-  import page from "page";
+  import { router } from 'tinro';
 
   let cities = ["Charleston, SC", "New york, NY", "San Francisco, CA"];
 
   function changeCurrentCity(city) {
     return () => {
       // set current city...then
-      page("/");
+      router.goto("/");
     };
   }
 </script>
@@ -619,6 +622,7 @@ git checkout -b 7-stores
 
 ### Summary
 
+In this section, we learned how to use `tinro` router to navigate from one component to another component both declaratively and programatically. There are more features to check out with `tinro` - https://github.com/AlexxNB/tinro 
 
 ---
 
@@ -763,7 +767,7 @@ git checkout -b 8-transitions
 
 ### Summary
 
-
+A Svelte store is a clear tool to manage state in an application, the API of the Svelte store is so expressive, you can implement single state store patterns like redux or streaming patterns like RxJS and any thing in between. Check out the Svelte Store documentation for a deeper dive into Svelte stores.
 
 ---
 
@@ -843,7 +847,7 @@ https://svelte.dev/docs#svelte_transition
   import { blur } from 'svelte/transition'
   import { dispatch } from '../store'
   import CityCard from '../components/CityCard.svelte'
-  import page from 'page'
+  import { router } from 'tinro'
 
   let cities = ['Charleston, SC', 'New york, NY', 'San Francisco, CA']
 
@@ -851,7 +855,7 @@ https://svelte.dev/docs#svelte_transition
     return () => {
       // set current city...then
       dispatch({type: 'SET_CURRENT', payload: city})
-        .then(() => page('/'))
+        .then(() => router.goto('/'))
     }
   }
 
@@ -893,6 +897,11 @@ git checkout -b 9-modal-actions
 
 ### Summary
 
+Having transitions and animations built into Svelte is a huge bonus to the framework, the transitions are declarative and intuitive. With this section we just introduced the concept. For more about transitions checkout the svelte transition section in Svelte Docs: https://svelte.dev/docs#svelte_transition, there are also many talks about svelte transitions on the Svelte Society Youtube channel - https://www.youtube.com/c/sveltesociety
+
+---
+
+## Take Break
 
 ---
 
@@ -1003,7 +1012,7 @@ https://svelte.dev/repl/e94473c00c5c422fa736ba60a2ca0e61?version=3.26.0
   import { blur } from 'svelte/transition'
   import { dispatch } from '../store'
   import CityCard from '../components/CityCard.svelte'
-  import page from 'page'
+  import { router } from 'tinro'
   import Modal from '../components/Modal.svelte'
   import Add from './Add.svelte'
 
@@ -1014,7 +1023,7 @@ https://svelte.dev/repl/e94473c00c5c422fa736ba60a2ca0e61?version=3.26.0
     return () => {
       // set current city...then
       dispatch({type: 'SET_CURRENT', payload: city})
-        .then(() => page('/'))
+        .then(() => router.goto('/'))
     }
   }
 
@@ -1068,6 +1077,7 @@ git checkout -b 10-testing
 
 ### Summary
 
+In this section, we introduced slots and actions. With slots you can add content to your component adding markup within the element tags. With actions, you can hook into the browser event system to directly manage elements, as you would with jquery. Actions are great for interacting with third party javascript modules, like d3 and map components. 
 
 
 ---
@@ -1194,7 +1204,7 @@ it("add city using form", () => {
 </main>
 ```
 
-The it function takes a description and a callback function, in the callback function,
+The `it` function takes a description and a `callback` function, in the callback function,
 we use the imported mount function to mount the App component passing the name
 prop. Then we use cypress contains function to find the dom element h1 and validate
 if it contains the following text 'Hello World!'
@@ -1216,6 +1226,8 @@ https://docs.cypress.io/guides/overview/why-cypress.html#In-a-nutshell
 
 ### Summary
 
+This is a very short introduction to cypress, cypress is a powerful tool for testing Javascript using different styles and patterns. Cypress gives you a clean way to TDD with Svelte. 
+
 ---
 
 ## Fin
@@ -1227,6 +1239,8 @@ This ends the workshop, but you do not have to end the journey here, you can tak
 * Show wind and tidal information from weatherbit
 * Convert web app to mobile app using capacitorjs
 * What else?
+
+> This workshop is designed to continue to practice and re-enforce component architecture concepts. So feel free to go through the workshop as a tutorial a couple of times to get some refinement. Then, try to create the app with no direction from the guide, see what you remember, and see what you don't, then refer to complete the parts you are not familar with, then repeat. 
 
 ### Thank you!
 
