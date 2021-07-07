@@ -1089,7 +1089,7 @@ In this section, we introduced slots and actions. With slots you can add content
 The first thing we need to do is install cypress and cypress-svelte-unit-test:
 
 ```sh
-yarn add -D cypress cypress-svelte-unit-test
+yarn add -D cypress@6.9.1 cypress-svelte-unit-test
 ```
 
 ## Initialize Cypress
